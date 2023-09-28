@@ -1,7 +1,10 @@
-type Crate = string;
-type Stack = Array<Crate>;
+export interface SupplyStack {
+  stacks: string[][];
+  moveCrates(fromStack: number, toStack: number, quantity: number): void;
+  getTopOfEachStack(): string[];
+}
 
-export default class SupplyStacks {
+export default class SupplyStacks implements SupplyStack {
   public stacks: Stack[];
 
   constructor(stacks: Stack[]) {
@@ -9,10 +12,7 @@ export default class SupplyStacks {
   }
 
   moveCrates(fromStack: number, toStack: number, quantity: number) {
-    for (let i = 0; i < quantity; i++) {
-      const cratesToMove = this.stacks[fromStack].splice(0, 1);
-      this.stacks[toStack].unshift(...cratesToMove);
-    }
+    throw new Error('Not implemented');
   }
 
   getTopOfEachStack(): string[] {

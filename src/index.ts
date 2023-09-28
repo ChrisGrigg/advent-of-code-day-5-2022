@@ -1,8 +1,8 @@
-import SupplyStacks from "./supply-stacks";
+import SupplyStacks, { SupplyStack } from "./supply-stacks";
+import SupplyStacksMultiple from "./supply-stacks-multiple";
+import SupplyStacksSingle from "./supply-stacks-single";
 
-function parseCrateStacks(input: string): SupplyStacks {
-  const supplyStacks: SupplyStacks = new SupplyStacks([]);
-
+function parseCrateStacks(input: string, supplyStacks: SupplyStack): SupplyStacks {
   const lines = input.split("\n");
 
   // Iterate over the lines in reverse order, starting at the second to last line.
@@ -22,7 +22,7 @@ function parseCrateStacks(input: string): SupplyStacks {
       }
     }
   }
-
+  
   return supplyStacks;
 }
 
@@ -51,10 +51,10 @@ function getTopOfEachStack(supplyStacks: SupplyStacks): string[] {
   return supplyStacks.stacks.map((stack) => stack[0]);
 }
 
-export default function main(input: string) {
+function main(input: string, supplyStack: SupplyStack) {
   const [crateStacksInput, moveInstructionsInput] = input.split("\n\n");
 
-  const supplyStacks = parseCrateStacks(crateStacksInput);
+  const supplyStacks = parseCrateStacks(crateStacksInput, supplyStack);
 
   const moveInstructions = moveInstructionsInput.split("\n");
 
@@ -63,4 +63,12 @@ export default function main(input: string) {
   const topOfEachStack = getTopOfEachStack(supplyStacks);
 
   return topOfEachStack.join("");
+}
+
+export function singleStackMain(input: string) {
+  return main(input, new SupplyStacksSingle([]));
+}
+
+export function multipleStacksMain(input: string) {
+  return main(input, new SupplyStacksMultiple([]));
 }
