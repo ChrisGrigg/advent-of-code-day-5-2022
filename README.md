@@ -1,1 +1,1 @@
-# advent-of-code-day-5-2022
+# advent-of-code-2022
