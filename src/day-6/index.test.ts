@@ -12,4 +12,8 @@ describe("Tuning Trouble", () => {
   it("calculate marker based on 14 distinct characters", () => {
     expect(main(input, 14)).toEqual(3588);
   });
+
+  it("throws error when input is empty", () => {
+    expect(() => main("")).toThrowError("Input is empty");
+  });
 });

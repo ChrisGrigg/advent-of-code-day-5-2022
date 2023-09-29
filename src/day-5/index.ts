@@ -1,6 +1,4 @@
 import SupplyStacks, { SupplyStack } from "./supply-stacks";
-import SupplyStacksMultiple from "./supply-stacks-multiple";
-import SupplyStacksSingle from "./supply-stacks-single";
 
 function parseCrateStacks(input: string, supplyStacks: SupplyStack): SupplyStacks {
   const lines = input.split("\n");
@@ -52,6 +50,14 @@ function getTopOfEachStack(supplyStacks: SupplyStacks): string[] {
 }
 
 function main(input: string, supplyStack: SupplyStack) {
+  if (!input) {
+    throw new Error("Input is empty");
+  }
+
+  if (!supplyStack) {
+    throw new Error("Supply stack is empty");
+  }
+
   const [crateStacksInput, moveInstructionsInput] = input.split("\n\n");
 
   const supplyStacks = parseCrateStacks(crateStacksInput, supplyStack);
@@ -65,10 +71,10 @@ function main(input: string, supplyStack: SupplyStack) {
   return topOfEachStack.join("");
 }
 
-export function singleStackMain(input: string) {
-  return main(input, new SupplyStacksSingle([]));
+export function singleStackMain(input: string, supplyStack: SupplyStack) {
+  return main(input, supplyStack);
 }
 
-export function multipleStacksMain(input: string) {
-  return main(input, new SupplyStacksMultiple([]));
+export function multipleStacksMain(input: string, supplyStack: SupplyStack) {
+  return main(input, supplyStack);
 }
